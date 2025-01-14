@@ -1,0 +1,28 @@
+<div class="liste-frais-container">
+    <h2>Liste des frais de déplacement</h2>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>Numéro Visiteur</th>
+          <th>Mois</th>
+          <th>Date</th>
+          <th>Type de Frais</th>
+          <th>Kilomètres (si applicable)</th>
+          <th>Montant (€)</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let frais of fraisList">
+          <td>{{ frais.visiteurId }}</td>
+          <td>{{ frais.date }}</td>
+          <td>{{ frais.type }}</td>
+          <td *ngIf="frais.type === 'Kilométrage'">{{ frais.kilometres }}</td>
+          <td *ngIf="frais.type !== 'Kilométrage'">—</td>
+          <td>{{ frais.montant | number: '1.2-2' }} €</td>
+          <td>{{ frais.description }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

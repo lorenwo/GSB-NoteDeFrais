@@ -1,0 +1,37 @@
+<div class="welcome-container">
+    <h1>Bienvenue dans le Portail de Frais</h1>
+    <h3>Bonjour, {{ userName || 'Invité' }}</h3>
+    <p>Accédez rapidement à vos fonctionnalités.</p>
+  </div>
+  
+  <!-- Section Visiteur Médical -->
+  <div class="quick-access" *ngIf="userRole === 'visiteur'">
+    <h4>Pour les Visiteurs Médicaux</h4>
+    <button (click)="navigateToDashboard()">Tableau de Bord</button>
+    <button (click)="navigateToFraisForm()">Nouvelle Fiche de Frais</button>
+    <button (click)="navigateToFraisList()">Mes Fiches de Frais</button>
+  </div>
+  
+  <!-- Section Comptable -->
+  <div *ngIf="userRole === 'comptable'" class="quick-access">
+    <h4>Pour les Comptables</h4>
+    <button (click)="navigateToDashboard()">Tableau de Bord</button>
+    <button (click)="navigateToValidation()">Valider les Fiches de Frais</button>
+  </div>
+  
+  <!-- Notifications -->
+  <div class="notifications">
+    <h4>Notifications Importantes</h4>
+    <ul>
+      <li *ngFor="let notification of notifications" [ngClass]="notification.type">
+        {{ notification.message }}
+      </li>
+    </ul>
+  </div>
+  
+  <!-- Actions générales -->
+  <div class="links">
+    <h4>Actions Rapides</h4>
+    <p><a routerLink="/support">Besoin d'aide ?</a></p>
+    <p><button (click)="logout()">Se déconnecter</button></p>
+  </div>

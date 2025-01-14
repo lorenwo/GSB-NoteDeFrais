@@ -1,0 +1,109 @@
+/* Variables CSS */
+:root {
+    --primary-color: #4CAF50;
+    --hover-color: #429e3d; /* Calculé avec darken() */
+    --background-color: #f9f9f9;
+    --box-shadow-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Styles généraux */
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+  }
+  
+  /* Conteneur de connexion */
+  .login-container {
+    width: 90%;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    box-shadow: 0 4px 15px var(--box-shadow-color);
+    border-radius: 10px;
+    background-color: white;
+  }
+  
+  .login-container h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+  }
+  
+  /* Groupe de formulaire */
+  .login-container .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .login-container .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #388e3c; /* Calculé avec darken($primary-color, 20%) */
+  }
+  
+  .login-container .form-group input,
+  .login-container .form-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .login-container .form-group input:focus,
+  .login-container .form-group select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 5px #7fcd7d; /* Calculé avec lighten($primary-color, 40%) */
+  }
+  
+  .login-container .form-group a {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    text-decoration: none;
+  }
+  
+  .login-container .form-group a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Bouton */
+  .login-container .btn {
+    display: inline-block;
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    text-align: center;
+    color: white;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-container .btn:hover {
+    background-color: var(--hover-color);
+  }
+  
+  /* Ajustements responsives */
+  @media (max-width: 600px) {
+    .login-container {
+      width: 95%;
+      padding: 15px;
+    }
+  
+    .login-container h2 {
+      font-size: 1.5rem;
+    }
+  
+    .login-container .btn {
+      font-size: 0.9rem;
+      padding: 10px;
+    }
+  }
+  

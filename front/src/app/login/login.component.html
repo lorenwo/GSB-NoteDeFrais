@@ -1,0 +1,25 @@
+<div class="login-container">
+    <h2>Connexion</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Nom d'utilisateur :</label>
+        <input type="text" id="name" [(ngModel)]="name" name="name" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" [(ngModel)]="password" name="password" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="role">Rôle :</label>
+        <select id="role" [(ngModel)]="role" name="role" required>
+          <option value="visiteur">Visiteur Médical</option>
+          <option value="comptable">Comptable</option>
+        </select>
+        <p><a routerLink="/mot-de-passe-oublie">Mot de Passe Oublié</a></p>
+      </div>
+  
+      <button type="submit" class="btn">Se connecter</button>
+    </form>
+  </div>
