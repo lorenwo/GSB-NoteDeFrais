@@ -24,7 +24,7 @@
     text-align: center;
     padding: 20px;
     background: var(--primary-color);
-    color: #fff;
+    color: #ff0000;
     border-radius: 8px;
     margin: 20px auto;
     max-width: 600px;
@@ -34,7 +34,7 @@
   .welcome-container h1 {
     margin: 0;
     font-size: 2.5rem;
-    color: #fff;
+    color: #ff0000;
   }
   
   .welcome-container h3 {
