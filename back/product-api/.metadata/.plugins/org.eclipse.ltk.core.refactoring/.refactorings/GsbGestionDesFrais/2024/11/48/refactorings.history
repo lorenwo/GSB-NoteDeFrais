@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete element from project &apos;GsbGestionDesFrais&apos;&#x0A;- Original project: &apos;GsbGestionDesFrais&apos;&#x0A;- Original element: &apos;GsbGestionDesFrais/src/main/java/com.demo.example.service&apos;" description="Delete element" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.demo.example.service" element2="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.demo.example" element3="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.demo" elements="3" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1732716983556" subPackages="false" version="1.0"/>
+</session>

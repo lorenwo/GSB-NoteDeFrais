@@ -1,0 +1,43 @@
+package com.example.demo.service;
+import com.example.demo.entity.FicheFrais;
+import com.example.demo.repository.FicheFraisRepository;
+import org.springframework.stereotype.Service;
+import java.util.List;
+
+@Service
+public class FicheFraisService {
+
+    private final FicheFraisRepository ficheFraisRepository;
+
+    public FicheFraisService(FicheFraisRepository ficheFraisRepository) {
+        this.ficheFraisRepository = ficheFraisRepository;
+    }
+
+    public List<FicheFrais> getAllFicheFrais() {
+        return ficheFraisRepository.findAll();
+    }
+
+    public FicheFrais getFicheFraisById(Long id) {
+        return ficheFraisRepository.findById(id).orElse(null);
+    }
+
+    public FicheFrais createFicheFrais(FicheFrais ficheFrais) {
+        return ficheFraisRepository.save(ficheFrais);
+    }
+
+    public FicheFrais updateFicheFrais(Long id, FicheFrais ficheFraisDetails) {
+        FicheFrais ficheFrais = getFicheFraisById(id);
+        if (ficheFrais != null) {
+            ficheFrais.setMois(ficheFraisDetails.getMois());
+            ficheFrais.setNbJustificatifs(ficheFraisDetails.getNbJustificatifs());
+            ficheFrais.setMontantValide(ficheFraisDetails.getMontantValide());
+            ficheFrais.setDateModif(ficheFraisDetails.getDateModif());
+            return ficheFraisRepository.save(ficheFrais);
+        }
+        return null;
+    }
+
+    public void deleteFicheFrais(Long id) {
+        ficheFraisRepository.deleteById(id);
+    }
+}

@@ -1,0 +1,52 @@
+package com.example.product_api.model;
+
+import java.sql.Date;
+
+import jakarta.persistence.*;
+
+@Entity
+public class LigneFraisForfait {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id_visiteur;
+
+    private Date mois;
+    private Double id_fraisForfait;
+    private Double quantite;
+
+    
+
+    // Getters et Setters
+    public Long getId_visiteur() {
+        return id_visiteur;
+    }
+
+    public void setId_visiteur(Long id_visiteur) {
+        this.id_visiteur = id_visiteur;
+    }
+
+    public Date getMois() {
+        return mois;
+    }
+
+    public void setMois(Date mois) {
+        this.mois = mois;
+    }
+
+    public Double getId_fraisForfait() {
+        return id_fraisForfait;
+    }
+
+    public void setId_fraisForfait(Double id_fraisForfait) {
+        this.id_fraisForfait = id_fraisForfait;
+    }
+
+    public Double getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(Double quantite) {
+        this.quantite = quantite;
+    }
+}
