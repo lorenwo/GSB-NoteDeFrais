@@ -22,6 +22,14 @@ public class Visiteur {
 
 
  
+    public Visiteur(String mdp) {
+        this.mdp = mdp;
+    }
+
+    public Visiteur() {
+        
+    }
+
     // Getters et Setters
     public Long getId_visiteur() {
         return id_visiteur;
