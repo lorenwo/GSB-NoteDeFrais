@@ -25,6 +25,10 @@ public class VisiteurService {
         return visiteurRepository.save(visiteur);
     }
 
+    public boolean verifieMdp(String mdp) {
+        return mdp != null && mdp.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$");
+    }
+
     public Visiteur updateVisiteur(Long id, Visiteur visiteurDetails) { // amélioration d'un visiteur
         Visiteur visiteur = getVisiteurById(id);
         if (visiteur != null) {
