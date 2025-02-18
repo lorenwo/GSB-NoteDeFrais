@@ -1,165 +1,107 @@
-/* Variables de style */
-:root {
-    --primary-color: #4A90E2; /* Bleu doux */
-    --secondary-color: #50C878; /* Vert menthe */
-    --background-color: #F9F9F9; /* Blanc cassé */
-    --text-color: #2C3E50; /* Gris anthracite */
-    --button-bg: var(--secondary-color);
-    --button-hover-bg: #42B16F; /* Vert menthe foncé */
-    --alert-color: #E74C3C; /* Rouge pâle */
-    --info-color: #AEDFF7; /* Bleu clair */
+/* Styles généraux */
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Aligné en haut */
+  min-height: 100vh;
+  text-align: center;
+}
+/* Conteneur principal */
+.container {
+  width: 75%;
+  max-width: 1000px;
+  margin-top: 50px; /* Espacement en haut */
+}
+/* Bloc de bienvenue */
+.welcome-container {
+  background: white;
+  padding: 50px;
+  margin: 20px auto;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  width: 75%; /* Prend toute la largeur du conteneur */
+  text-align: center;
+  animation: fadeIn 0.6s ease-in-out;
+}
+h1 {
+  color: #333;
+  margin-bottom: 10px;
+  font-size: 32px;
+}
+h3 {
+  color: #007bff;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+/* Sections secondaires */
+.quick-access, .notifications, .links {
+  background: white;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 75%;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+/* Boutons */
+button {
+  display: block;
+  width: 100%;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  color: white;
+  border: none;
+  padding: 14px;
+  margin: 8px 0;
+  font-size: 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+button:hover {
+  background: linear-gradient(to right, #00f2fe, #4facfe);
+  transform: scale(1.05);
+}
+/* Notifications */
+.notifications ul {
+  list-style: none;
+  padding: 0;
+}
+.notifications li {
+  padding: 12px;
+  margin: 5px 0;
+  border-radius: 6px;
+  font-weight: bold;
+}
+.notifications .alert {
+  background: rgba(255, 0, 0, 0.1);
+  color: red;
+}
+.notifications .info {
+  background: rgba(0, 128, 0, 0.1);
+  color: green;
+}
+/* Liens */
+.links a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+}
+.links a:hover {
+  text-decoration: underline;
+}
+/* Animation d'apparition */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
   }
-  
-  /* Corps général */
-  body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: var(--background-color);
-    color: var(--text-color);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  /* Conteneur principal de bienvenue */
-  .welcome-container {
-    text-align: center;
-    padding: 20px;
-    background: var(--primary-color);
-    color: #ff0000;
-    border-radius: 8px;
-    margin: 20px auto;
-    max-width: 600px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .welcome-container h1 {
-    margin: 0;
-    font-size: 2.5rem;
-    color: #ff0000;
-  }
-  
-  .welcome-container h3 {
-    margin: 10px 0;
-    font-size: 1.5rem;
-    color: rgba(255, 255, 255, 0.8);
-  }
-  
-  .welcome-container p {
-    font-size: 1.2rem;
-    margin-top: 10px;
-    color: rgba(255, 255, 255, 0.6);
-  }
-  
-  /* Section d'accès rapide */
-  .quick-access {
-    margin: 20px auto;
-    max-width: 600px;
-    background: #fff;
-    border: 1px solid rgba(74, 144, 226, 0.3);
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-  }
-  
-  .quick-access h4 {
-    font-size: 1.5rem;
-    color: var(--secondary-color);
-    margin-bottom: 15px;
-  }
-  
-  .quick-access button {
-    display: block;
-    width: 100%;
-    padding: 10px 20px;
-    margin: 10px 0;
-    background-color: var(--button-bg);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .quick-access button:hover {
-    background-color: var(--button-hover-bg);
-  }
-  
-  /* Notifications */
-  .notifications {
-    margin: 20px auto;
-    max-width: 600px;
-    background: #fff;
-    border: 1px solid rgba(174, 223, 247, 0.3);
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-  }
-  
-  .notifications h4 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    color: var(--primary-color);
-  }
-  
-  .notifications ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .notifications li {
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
-  
-  .notifications li.alert {
-    background-color: rgba(231, 76, 60, 0.4);
-    color: var(--alert-color);
-  }
-  
-  .notifications li.info {
-    background-color: rgba(174, 223, 247, 0.4);
-    color: #2C3E50;
-  }
-  
-  /* Liens et actions rapides */
-  .links {
-    margin: 20px auto;
-    max-width: 600px;
-    text-align: center;
-  }
-  
-  .links h4 {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    margin-bottom: 15px;
-  }
-  
-  .links a {
-    color: var(--secondary-color);
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
-  }
-  
-  .links a:hover {
-    color: #42B16F;
-  }
-  
-  .links button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: var(--alert-color);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .links button:hover {
-    background-color: #C0392B;
-  }
-  
+}

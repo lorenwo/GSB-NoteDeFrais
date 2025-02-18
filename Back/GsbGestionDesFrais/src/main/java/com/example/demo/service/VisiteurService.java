@@ -1,8 +1,8 @@
 package com.example.demo.service;
+import java.util.List;
+import org.springframework.stereotype.Service;
 import com.example.demo.entity.Visiteur;
 import com.example.demo.repository.VisiteurRepository;
-import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Service
 public class VisiteurService {
@@ -25,10 +25,6 @@ public class VisiteurService {
         return visiteurRepository.save(visiteur);
     }
 
-    public boolean verifieMdp(String mdp) {
-        return mdp != null && mdp.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$");
-    }
-
     public Visiteur updateVisiteur(Long id, Visiteur visiteurDetails) { // amélioration d'un visiteur
         Visiteur visiteur = getVisiteurById(id);
         if (visiteur != null) {
@@ -47,4 +43,8 @@ public class VisiteurService {
     public void deleteVisiteur(Long id) { // suppression d'un visiteur 
         visiteurRepository.deleteById(id);
     }
+    public Visiteur authenticate(String login, String mdp) {
+        return visiteurRepository.findByLoginAndMdp(login, mdp).orElse(null);
+    }
+    
 }

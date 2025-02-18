@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 })
 export class AccueilComponent implements OnInit {
 
-  userName: string | null = null;
-  userRole: 'visiteur' | 'comptable' | null = null;
+  userName: string = 'Invité';
+  userRole: 'visiteur' | 'comptable' = 'visiteur'; // Valeur par défaut
   notifications = [
     { message: '2 fiches en attente de validation', type: 'alert' },
     { message: 'Votre dernier frais a été enregistré avec succès', type: 'info' }
@@ -21,13 +21,11 @@ export class AccueilComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    const user = localStorage.getItem('user');
-    if (user) {
-      const parsedUser = JSON.parse(user);
-      this.userName = parsedUser.name;
-      this.userRole = parsedUser.role || 'visiteur';
-    } else {
-      this.router.navigate(['/login']); // Redirige vers la page de login si pas d'utilisateur
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const userData = JSON.parse(storedUser);
+      this.userName = userData.login || 'Invité';
+      this.userRole = userData.role || 'visiteur';
     }
   }
 
@@ -49,15 +47,7 @@ export class AccueilComponent implements OnInit {
     this.router.navigate(['/frais']);
   }
 
-
-
   navigateToFraisList() {
     this.router.navigate(['/liste-frais']);
-  }
-
-  logout() {
-    // Supprimer l'utilisateur du localStorage pour la déconnexion
-    localStorage.removeItem('user');
-    this.router.navigate(['/login']);
   }
 }
