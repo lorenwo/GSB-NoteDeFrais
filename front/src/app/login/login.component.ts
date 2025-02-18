@@ -12,27 +12,25 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  name: string = '';
-  password: string = '';
-  role: 'visiteur' | 'comptable' = 'visiteur'; // Rôle par défaut
+  login: string = '';
+  mdp: string = '';
 
   constructor(private router: Router, private userService: UserService) {}
 
   onSubmit(): void {
-    if (this.name.trim() && this.password.trim()) {
-      const role = this.role;
-      localStorage.setItem(
-        'user',
-        JSON.stringify({ name: this.name, role: this.role })
+    if (this.login.trim() && this.mdp.trim()) {
+      this.userService.login({ login: this.login, mdp: this.mdp }).subscribe(
+        (response) => {
+          alert('Connexion réussie !');
+          localStorage.setItem('user', JSON.stringify(response));
+          this.router.navigate(['/Accueil']);
+        },
+        (error) => {
+          alert('Identifiants invalides.');
+        }
       );
-
-      // Met à jour le rôle dans le service utilisateur
-      this.userService.setUserRole(role);
-
-      alert('Connexion réussie!');
-      this.router.navigate(['/Accueil']);
     } else {
       alert('Veuillez remplir tous les champs.');
     }
-}
+  }
 }

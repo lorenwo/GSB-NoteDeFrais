@@ -1,18 +1,16 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private userRoleSubject = new BehaviorSubject<string | null>(null);
-  userRole$ = this.userRoleSubject.asObservable();
+  private apiUrl = 'http://localhost:8080/api/visiteur/login';
 
-  setUserRole(role: string | null): void {
-    this.userRoleSubject.next(role);
-  }
+  private http = inject(HttpClient); // ✅ Injection propre à Angular 18
 
-  getUserRole(): string | null {
-    return this.userRoleSubject.value;
+  login(userData: { login: string; mdp: string }): Observable<any> {
+    return this.http.post(this.apiUrl, userData, { withCredentials: true });
   }
 }
