@@ -6,6 +6,7 @@ import { FraisFormComponent } from './frais/frais-form/frais-form.component';
 import { AccueilComponent } from './accueil/accueil.component'; // Importez le composant Accueil
 import { ValidationFraisComponent } from './validation-frais/validation-frais.component';
 import { RoleGuard } from './guards/auth.guards';
+import { StatistiqueComponent } from './statistique/statistique.component';
 
 
 export const routes: Routes = [
@@ -14,6 +15,7 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'liste-frais', component: FraisListComponent },
     { path: 'frais', component: FraisFormComponent },
+    { path: 'statistique', component: StatistiqueComponent},
     { path: 'valide-frais', component: ValidationFraisComponent, canActivate: [RoleGuard]},
 ];
 
