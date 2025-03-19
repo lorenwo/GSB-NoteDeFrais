@@ -1,88 +1,42 @@
 package com.example.demo.entity;
-import java.sql.Date;
 
-
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class Visiteur {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_visiteur;
+    private Long id;
 
-    private String nom;
-    private String prenom;
-    private String adresse;
-    private String ville;
-    private Double cp;
-    private Date dateEmbauche;
+    @Column(nullable = false, unique = true)
     private String login;
+
+    @Column(nullable = false)
     private String mdp;
 
+    // 🔥 Constructeur par défaut
+    public Visiteur() {}
 
- 
-    public Visiteur(String mdp) {
+    // 🔥 Constructeur avec paramètres
+    public Visiteur(String login, String mdp) {
+        this.login = login;
         this.mdp = mdp;
     }
 
-    public Visiteur() {
-        
+    // 🔥 Getters et Setters
+    public Long getId() {
+        return id;
     }
 
-    // Getters et Setters
-    public Long getId_visiteur() {
-        return id_visiteur;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setId_visiteur(Long id_visiteur) {
-        this.id_visiteur = id_visiteur;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public String getadresse() {
-        return adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
-    public String getVille() {
-        return ville;
-    }
-
-    public void setVille(String ville) {
-        this.ville = ville;
-    }
-    public Double getCp() {
-        return cp;
-    }
-
-    public void setCp(Double cp) {
-        this.cp = cp;
-    }
-    public Date getDateEmbauche() {
-        return dateEmbauche;
-    }
-
-    public void setDateEmbauche(Date dateEmbauche) {
-        this.dateEmbauche = dateEmbauche;
-    }
     public String getLogin() {
         return login;
     }
@@ -90,6 +44,7 @@ public class Visiteur {
     public void setLogin(String login) {
         this.login = login;
     }
+
     public String getMdp() {
         return mdp;
     }

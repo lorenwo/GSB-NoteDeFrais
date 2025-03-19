@@ -1,6 +1,9 @@
 package com.example.demo.service;
+
 import java.util.List;
+
 import org.springframework.stereotype.Service;
+
 import com.example.demo.entity.Visiteur;
 import com.example.demo.repository.VisiteurRepository;
 
@@ -13,26 +16,25 @@ public class VisiteurService {
         this.visiteurRepository = visiteurRepository;
     }
 
-    public List<Visiteur> getAllVisiteurs() { //on recupere la list de visiteur du repository
+    // ✅ Récupération de la liste de tous les visiteurs
+    public List<Visiteur> getAllVisiteurs() {
         return visiteurRepository.findAll();
     }
 
-    public Visiteur getVisiteurById(Long id) { //On recupere les visiteurs par leur ID 
+    // ✅ Récupération d'un visiteur par ID
+    public Visiteur getVisiteurById(Long id) {
         return visiteurRepository.findById(id).orElse(null);
     }
 
-    public Visiteur createVisiteur(Visiteur visiteur) { //Creation d'un visiteur 
+    // ✅ Création d'un visiteur
+    public Visiteur createVisiteur(Visiteur visiteur) {
         return visiteurRepository.save(visiteur);
     }
 
-    public Visiteur updateVisiteur(Long id, Visiteur visiteurDetails) { // amélioration d'un visiteur
+    // ✅ Mise à jour d'un visiteur
+    public Visiteur updateVisiteur(Long id, Visiteur visiteurDetails) {
         Visiteur visiteur = getVisiteurById(id);
         if (visiteur != null) {
-            visiteur.setNom(visiteurDetails.getNom());
-            visiteur.setPrenom(visiteurDetails.getPrenom());
-            visiteur.setAdresse(visiteurDetails.getadresse());
-            visiteur.setCp(visiteurDetails.getCp());
-            visiteur.setDateEmbauche(visiteurDetails.getDateEmbauche());
             visiteur.setLogin(visiteurDetails.getLogin());
             visiteur.setMdp(visiteurDetails.getMdp());
             return visiteurRepository.save(visiteur);
@@ -40,11 +42,13 @@ public class VisiteurService {
         return null;
     }
 
-    public void deleteVisiteur(Long id) { // suppression d'un visiteur 
+    // ✅ Suppression d'un visiteur par ID
+    public void deleteVisiteur(Long id) {
         visiteurRepository.deleteById(id);
     }
+
+    // ✅ Authentification d'un visiteur
     public Visiteur authenticate(String login, String mdp) {
         return visiteurRepository.findByLoginAndMdp(login, mdp).orElse(null);
     }
-    
 }

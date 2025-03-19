@@ -19,7 +19,7 @@ import com.example.demo.service.VisiteurService;
 
 @RestController
 @RequestMapping("/api/visiteur")
-@CrossOrigin(origins = "http://localhost:4200") // ✅ Gère les problèmes CORS
+@CrossOrigin(origins = "http://localhost:4200") // ✅ Gestion CORS pour Angular
 public class VisiteurController {
 
     private final VisiteurService visiteurService;
@@ -28,38 +28,46 @@ public class VisiteurController {
         this.visiteurService = visiteurService;
     }
 
+    // ✅ Récupération de tous les visiteurs
     @GetMapping
     public ResponseEntity<List<Visiteur>> getAllVisiteurs() {
         List<Visiteur> visiteurs = visiteurService.getAllVisiteurs();
         return ResponseEntity.ok(visiteurs);
     }
 
+    // ✅ Récupération d'un visiteur par ID
     @GetMapping("/{id}")
     public ResponseEntity<Visiteur> getVisiteurById(@PathVariable("id") Long id) {
         Visiteur visiteur = visiteurService.getVisiteurById(id);
         return visiteur != null ? ResponseEntity.ok(visiteur) : ResponseEntity.notFound().build();
     }
 
+    // ✅ Création d'un visiteur
     @PostMapping
     public ResponseEntity<Visiteur> createVisiteur(@RequestBody Visiteur visiteur) {
         Visiteur createdVisiteur = visiteurService.createVisiteur(visiteur);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdVisiteur);
     }
 
+    // ✅ Authentification d'un visiteur
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Visiteur visiteur) {
         Visiteur authenticatedVisiteur = visiteurService.authenticate(visiteur.getLogin(), visiteur.getMdp());
         if (authenticatedVisiteur != null) {
             return ResponseEntity.ok(authenticatedVisiteur);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"message\": \"Identifiants invalides\"}");
         }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Identifiants invalides");
     }
+
+    // ✅ Mise à jour d'un visiteur
     @PutMapping("/{id}")
     public ResponseEntity<Visiteur> updateVisiteur(@PathVariable("id") Long id, @RequestBody Visiteur visiteurDetails) {
         Visiteur updatedVisiteur = visiteurService.updateVisiteur(id, visiteurDetails);
         return updatedVisiteur != null ? ResponseEntity.ok(updatedVisiteur) : ResponseEntity.notFound().build();
     }
 
+    // ✅ Suppression d'un visiteur par ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteVisiteur(@PathVariable("id") Long id) {
         visiteurService.deleteVisiteur(id);

@@ -14,47 +14,46 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrls: ['./frais-form.component.css']
 })
 export class FraisFormComponent {
-
-  private readonly router = inject(Router);
-
   frais = {
-    visiteurId: '',
+    visiteur: {
+      id: '' // Assure-toi que l'ID existe en base !
+    },
     date: '',
-    type: '',
-    kilometres: 0,
+    typeFrais: '',
+    kilometres: '',
     montant: 0,
-    description: '',
-    amount: null
+    description: ''
   };
+  
 
   typesFrais = ['Repas midi', 'Relais étape', 'Nuitée', 'Kilométrage'];
 
   constructor(private fraisService: FraisService) {}
 
-  // Appelé lors de la soumission du formulaire
   onSubmit() {
-    this.fraisService.addFrais({ ...this.frais }).subscribe(
+    console.log('Requête envoyée au backend :', this.frais);
+  
+    this.fraisService.addFrais(this.frais).subscribe(
       response => {
-        alert('Frais enregistré avec succès !');
-        this.router.navigate(['/liste-frais']);
+        console.log('Frais ajouté avec succès');
+        this.resetForm();
       },
       error => {
-        console.error("Erreur lors de l'enregistrement des frais", error);
-        alert("Une erreur est survenue lors de l'enregistrement des frais.");
+        console.error('Erreur lors de l\'ajout du frais', error);
       }
     );
   }
 
-  // Réinitialiser le formulaire
   resetForm() {
     this.frais = {
-      visiteurId: '',
+      visiteur: {
+        id: '' // Assure-toi que l'ID existe en base !
+      },
       date: '',
-      type: '',
-      kilometres: 0,
+      typeFrais: '',
+      kilometres: '',
       montant: 0,
       description: '',
-      amount: null
     };
   }
 }
