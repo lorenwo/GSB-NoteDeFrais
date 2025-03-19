@@ -1,6 +1,6 @@
 <nav class="navbar">
   <button class="toggle-btn" (click)="toggleNavbar()">
-    {{ isCollapsed ? '☰' : '✖' }}
+    {{ isCollapsed ? '✖' : '☰' }}
   </button>
   <ul class="menu-list" [ngClass]="{ 'collapsed': isCollapsed }">
     <li><a routerLink="/Accueil">Accueil</a></li>
@@ -8,7 +8,7 @@
     <li><a routerLink="/frais">Frais</a></li>
     <li><a routerLink="/liste-frais">Liste des frais</a></li>
     <li><a routerLink="/statistique">Statistique</a></li>
-    <li><a routerLink="/valide-frais">Validation des Fiches</a></li>
+    <!-- <li><a routerLink="/valide-frais">Validation des Fiches</a></li> -->
   </ul>
 </nav>
 <!-- Contenu principal -->

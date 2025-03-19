@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,69 +9,78 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
-
 @Entity
-	public class FicheFrais {
-	    @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long id_ficheFrais;
-	
-	    private int nbJustificatifs;
-	    private double montantValide;
-	    private LocalDate dateModif;
+public class FicheFrais {
 
-	    @ManyToOne
-	    @JoinColumn(name = "visiteur_id", nullable = false)
-	    private Visiteur visiteur;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idFicheFrais;
 
-	    @ManyToOne
-	    @JoinColumn(name = "mois", nullable = false)
-	    private LigneFraisForfait mois;
+    private int nbJustificatifs;
+    private double montantValide;
+    private LocalDate dateModif;
 
-	    public Long getId_ficheFrais() {
-	        return id_ficheFrais;
-	    }
+    private String type; // ✅ Ajout du champ type
+    private String description; // ✅ Ajout du champ description
 
-	    public void setId_ficheFrais(Long id_ficheFrais) {
-	        this.id_ficheFrais = id_ficheFrais;
-	    }
+    @ManyToOne
+    @JoinColumn(name = "visiteur_id", nullable = false)
+    private Visiteur visiteur;
 
-		public int getNbJustificatifs() {
-			return nbJustificatifs;
-		}
+    // Getters et Setters
+    public Long getIdFicheFrais() {
+        return idFicheFrais;
+    }
 
-		public void setNbJustificatifs(int nbJustificatifs) {
-			this.nbJustificatifs = nbJustificatifs;
-		}
+    public void setIdFicheFrais(Long idFicheFrais) {
+        this.idFicheFrais = idFicheFrais;
+    }
 
-		public double getMontantValide() {
-			return montantValide;
-		}
+    public int getNbJustificatifs() {
+        return nbJustificatifs;
+    }
 
-		public void setMontantValide(double montantValide) {
-			this.montantValide = montantValide;
-		}
+    public void setNbJustificatifs(int nbJustificatifs) {
+        this.nbJustificatifs = nbJustificatifs;
+    }
 
-		public LocalDate getDateModif() {
-			return dateModif;
-		}
+    public double getMontantValide() {
+        return montantValide;
+    }
 
-		public void setDateModif(LocalDate dateModif) {
-			this.dateModif = dateModif;
-		}
+    public void setMontantValide(double montantValide) {
+        this.montantValide = montantValide;
+    }
 
-		public Visiteur getVisiteur() {
-			return visiteur;
-		}
+    public LocalDate getDateModif() {
+        return dateModif;
+    }
 
-		public void setVisiteur(Visiteur visiteur) {
-			this.visiteur = visiteur;
-		}
-		
-		
+    public void setDateModif(LocalDate dateModif) {
+        this.dateModif = dateModif;
+    }
 
-		
+    public String getType() {
+        return type;
+    }
 
-	    
-	    
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Visiteur getVisiteur() {
+        return visiteur;
+    }
+
+    public void setVisiteur(Visiteur visiteur) {
+        this.visiteur = visiteur;
+    }
+}

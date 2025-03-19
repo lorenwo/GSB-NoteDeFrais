@@ -14,11 +14,11 @@
       </thead>
       <tbody>
         <tr *ngFor="let frais of fraisList">
-          <td>{{ frais.visiteurId }}</td>
+          <td>{{ frais.visiteur.id }}</td>
           <td>{{ frais.date }}</td>
-          <td>{{ frais.type }}</td>
-          <td *ngIf="frais.type === 'Kilométrage'">{{ frais.kilometres }}</td>
-          <td *ngIf="frais.type !== 'Kilométrage'">—</td>
+          <td>{{ frais.typeFrais }}</td>
+          <td *ngIf="frais.typeFrais === 'Kilométrage'">{{ frais.kilometres }}</td>
+          <td *ngIf="frais.typeFrais !== 'Kilométrage'">-</td>
           <td>{{ frais.montant | number: '1.2-2' }} €</td>
           <td>{{ frais.description }}</td>
         </tr>

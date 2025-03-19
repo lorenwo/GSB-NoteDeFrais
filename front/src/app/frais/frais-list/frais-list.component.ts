@@ -17,7 +17,10 @@ export class FraisListComponent implements OnInit {
 
   ngOnInit() {
     this.fraisService.getFrais().subscribe({
-      next: (data) => (this.fraisList = data),
+      next: (data) => {
+        console.log('Frais récupérés :', data);
+        this.fraisList = data;
+      },
       error: (err) => console.error('Erreur lors de la récupération des frais', err)
     });
   }
