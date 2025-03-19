@@ -26,7 +26,7 @@ export class FraisFormComponent {
   };
   
 
-  typesFrais = ['Repas midi', 'Relais étape', 'Nuitée', 'Kilométrage'];
+  typesFrais = ['Repas midi', 'Relais étape', 'Nuitée', 'Kilométrage', 'Hors forfait'];
 
   constructor(private fraisService: FraisService) {}
 
