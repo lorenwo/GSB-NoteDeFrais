@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-accueil',
   standalone: true,
-  imports: [NgClass, CommonModule],
+  imports: [ CommonModule],
   templateUrl: './accueil.component.html',
   styleUrls: ['./accueil.component.css']
 })
@@ -29,18 +29,9 @@ export class AccueilComponent implements OnInit {
     }
   }
 
-  navigateToValidation() {
-    if (this.userRole === 'comptable') {
-      this.router.navigate(['/valide-frais']);
-    }
-  }
-
   navigateToDashboard() {
-    if (this.userRole === 'visiteur') {
+   
       this.router.navigate(['/visiteur-dashboard']);
-    } else if (this.userRole === 'comptable') {
-      this.router.navigate(['/comptable-dashboard']);
-    }
   }
 
   navigateToFraisForm() {
