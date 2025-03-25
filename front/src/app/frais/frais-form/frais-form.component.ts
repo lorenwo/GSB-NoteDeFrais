@@ -28,7 +28,7 @@ export class FraisFormComponent {
 
   typesFrais = ['Repas midi', 'Relais étape', 'Nuitée', 'Kilométrage', 'Hors forfait'];
 
-  constructor(private fraisService: FraisService) {}
+  constructor(private fraisService: FraisService, private router: Router) {}
 
   onSubmit() {
     console.log('Requête envoyée au backend :', this.frais);
@@ -36,7 +36,7 @@ export class FraisFormComponent {
     this.fraisService.addFrais(this.frais).subscribe(
       response => {
         console.log('Frais ajouté avec succès');
-        this.resetForm();
+        this.goToListForfait();
       },
       error => {
         console.error('Erreur lors de l\'ajout du frais', error);
@@ -44,16 +44,7 @@ export class FraisFormComponent {
     );
   }
 
-  resetForm() {
-    this.frais = {
-      visiteur: {
-        id: '' // Assure-toi que l'ID existe en base !
-      },
-      date: '',
-      typeFrais: '',
-      kilometres: '',
-      montant: 0,
-      description: '',
-    };
+  public goToListForfait() {
+    this.router.navigate(['/liste-frais']);
   }
 }

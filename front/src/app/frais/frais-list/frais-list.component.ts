@@ -24,4 +24,20 @@ export class FraisListComponent implements OnInit {
       error: (err) => console.error('Erreur lors de la récupération des frais', err)
     });
   }
+
+  onDeleteFrais(frais: any) {
+    if (confirm(`Voulez-vous vraiment supprimer ce frais du ${frais.date} ?`)) {
+      this.fraisService.deleteFrais(frais.id).subscribe({
+        next: () => {
+          // ✅ Supprimer le frais dans la liste locale
+          this.fraisList = this.fraisList.filter(item => item.id !== frais.id);
+          console.log(`Frais du ${frais.date} supprimé avec succès.`);
+        },
+        error: (err) => {
+          console.error('Erreur lors de la suppression :', err);
+          alert(`Erreur lors de la suppression du frais : ${err.message}`);
+        }
+      });
+    }
+  }
 }
