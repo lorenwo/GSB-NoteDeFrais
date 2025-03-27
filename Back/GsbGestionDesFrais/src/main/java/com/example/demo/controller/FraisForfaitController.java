@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,5 +38,15 @@ public class FraisForfaitController {
     public ResponseEntity<FraisForfait> createFraisForfait(@RequestBody FraisForfait fraisForfait) {
         FraisForfait createdFraisForfait = fraisForfaitService.createFraisForfait(fraisForfait);
         return ResponseEntity.ok(createdFraisForfait);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteFraisForfait(@PathVariable Long id) {
+        boolean deleted = fraisForfaitService.deleteFraisForfaitById(id);
+        if (deleted) {
+            return ResponseEntity.ok().body(null); // ✅ Retourne une réponse vide
+        } else {
+            return ResponseEntity.status(404).body("Frais non trouvé avec l'ID : " + id);
+        }
     }
 }

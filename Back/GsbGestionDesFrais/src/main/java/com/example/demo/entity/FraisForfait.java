@@ -102,7 +102,7 @@ public class FraisForfait {
 
     // ✅ Méthode pour calculer le montant en fonction du type de frais
     public void calculateMontant() {
-        if ("Kilométrique".equalsIgnoreCase(this.typeFrais) && this.kilometres != null) {
+        if ("Kilométrage".equalsIgnoreCase(this.typeFrais) && this.kilometres != null) {
             this.montant = this.kilometres * 0.5; // Exemple : 0.5€ par km
         } else if ("Nuitée".equalsIgnoreCase(this.typeFrais)) {
             this.montant = 80.0; // Exemple : 80€ pour un forfait hôtel
