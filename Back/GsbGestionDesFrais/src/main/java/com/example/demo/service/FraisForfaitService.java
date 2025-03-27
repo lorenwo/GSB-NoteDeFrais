@@ -41,5 +41,12 @@ public class FraisForfaitService {
         return fraisForfaitRepository.save(fraisForfait);
     }
     
+    public boolean deleteFraisForfaitById(Long id) {
+        if (fraisForfaitRepository.existsById(id)) {
+            fraisForfaitRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
     
 }
