@@ -15,7 +15,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let frais of fraisList">
-        <td>{{ frais.visiteur.id }}</td>
+        <td>{{ frais.visiteur.login }}</td>
         <td>{{ frais.date }}</td>
         <td>{{ frais.typeFrais }}</td>
         <td *ngIf="frais.typeFrais === 'Kilométrage'">{{ frais.kilometres }}</td>

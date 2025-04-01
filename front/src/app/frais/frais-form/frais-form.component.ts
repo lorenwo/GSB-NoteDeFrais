@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { FraisService } from '../../services/frais.service';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { UserService } from '../../services/user.service';
+
 
 @Component({
   selector: 'app-frais-form',
@@ -15,9 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class FraisFormComponent {
   frais = {
-    visiteur: {
-      id: '' // Assure-toi que l'ID existe en base !
-    },
+    visiteur: {}, // sera défini dynamiquement
     date: '',
     typeFrais: '',
     kilometres: '',
@@ -28,9 +28,21 @@ export class FraisFormComponent {
 
   typesFrais = ['Repas midi', 'Relais étape', 'Nuitée', 'Kilométrage', 'Hors forfait'];
 
-  constructor(private fraisService: FraisService, private router: Router) {}
+  constructor(private fraisService: FraisService, private router: Router,  private userService: UserService ) {}
 
   onSubmit() {
+    const currentUser = this.userService.getUser();
+  
+    if (!currentUser) {
+      alert("Aucun utilisateur connecté.");
+      return;
+    }
+  
+    // Attribue le visiteur automatiquement
+    this.frais.visiteur = {
+      id: currentUser.id
+    };
+  
     console.log('Requête envoyée au backend :', this.frais);
   
     this.fraisService.addFrais(this.frais).subscribe(
