@@ -108,6 +108,30 @@ button:hover {
   text-decoration: underline;
 }
 
+/* Bouton de déconnexion (en bas, même style) */
+.logout-button {
+  width: 75%;
+  margin: 30px auto 20px auto;
+}
+
+.logout-button button {
+  width: 100%;
+  background: linear-gradient(to right, #ff6b6b, #ffdd57);
+  color: white;
+  border: none;
+  padding: 14px;
+  font-size: 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.logout-button button:hover {
+  background: linear-gradient(to right, #ffdd57, #ff6b6b);
+  transform: scale(1.05);
+}
+
+
 /* Animation d'apparition */
 @keyframes fadeIn {
   from {

@@ -14,23 +14,26 @@ import { UserService } from '../services/user.service';
 export class LoginComponent {
   login: string = '';
   mdp: string = '';
+  errorMessage: string | null = null;
 
   constructor(private router: Router, private userService: UserService) {}
 
   onSubmit(): void {
-    if (this.login.trim() && this.mdp.trim()) {
-      this.userService.login({ login: this.login, mdp: this.mdp }).subscribe(
-        (response) => {
-          alert('Connexion réussie !');
-          localStorage.setItem('user', JSON.stringify(response));
-          this.router.navigate(['/Accueil']);
-        },
-        (error) => {
-          alert('Identifiants invalides.');
-        }
-      );
-    } else {
-      alert('Veuillez remplir tous les champs.');
+    this.errorMessage = null;
+  
+    if (!this.login.trim() || !this.mdp.trim()) {
+      this.errorMessage = 'Veuillez remplir tous les champs.';
+      return;
     }
+  
+    this.userService.login({ login: this.login, mdp: this.mdp }).subscribe({
+      next: () => {
+        this.router.navigate(['/Accueil']);
+      },
+      error: () => {
+        this.errorMessage = 'Identifiants invalides.';
+      }
+    });
   }
+  
 }

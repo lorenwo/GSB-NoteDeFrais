@@ -1,6 +1,6 @@
 <div class="welcome-container">
   <h1>Bienvenue dans le Portail de Frais</h1>
-  <h3>Bonjour, {{ userName || 'Invité' }}</h3>
+  <h3>Bonjour, {{ userName }}</h3>
   <p>Accédez rapidement à vos fonctionnalités.</p>
 </div>
 
@@ -14,4 +14,8 @@
 <div class="links">
   <h4>Actions Rapides</h4>
   <p><a routerLink="/support">Besoin d'aide ?</a></p>
+</div>
+
+<div class="logout-button">
+  <button (click)="logout()">Se déconnecter</button>
 </div>
