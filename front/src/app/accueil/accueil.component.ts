@@ -1,37 +1,35 @@
-import { CommonModule, NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { UserService } from '../services/user.service'; // adapte le chemin selon ton projet
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-accueil',
   standalone: true,
-  imports: [ CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './accueil.component.html',
   styleUrls: ['./accueil.component.css']
 })
 export class AccueilComponent implements OnInit {
 
   userName: string = 'Invité';
-  userRole: 'visiteur' | 'comptable' = 'visiteur'; // Valeur par défaut
-  notifications = [
-    { message: '2 fiches en attente de validation', type: 'alert' },
-    { message: 'Votre dernier frais a été enregistré avec succès', type: 'info' }
-  ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      const userData = JSON.parse(storedUser);
-      this.userName = userData.login || 'Invité';
-      this.userRole = userData.role || 'visiteur';
+    const user = this.userService.getUser();
+    if (user) {
+      this.userName = user.login;
     }
   }
 
+  logout(): void {
+    this.userService.logout();
+    this.router.navigate(['/login']);
+  }
+
   navigateToDashboard() {
-   
-      this.router.navigate(['/visiteur-dashboard']);
+    this.router.navigate(['/visiteur-dashboard']);
   }
 
   navigateToFraisForm() {

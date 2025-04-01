@@ -5,6 +5,7 @@ import { FraisListComponent } from './frais/frais-list/frais-list.component';
 import { FraisFormComponent } from './frais/frais-form/frais-form.component';
 import { AccueilComponent } from './accueil/accueil.component'; // Importez le composant Accueil
 import { StatistiqueComponent } from './statistique/statistique.component';
+import { SupportComponent } from './support/support.component';
 
 
 export const routes: Routes = [
@@ -14,6 +15,7 @@ export const routes: Routes = [
     { path: 'liste-frais', component: FraisListComponent },
     { path: 'frais', component: FraisFormComponent },
     { path: 'statistique', component: StatistiqueComponent},
+    { path: 'support', component: SupportComponent}
 ];
 
 @NgModule({
