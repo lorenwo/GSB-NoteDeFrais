@@ -20,11 +20,6 @@ public class FraisForfaitService {
         this.visiteurRepository = visiteurRepository;
     }
 
-    // ✅ Récupération de tous les frais
-    public List<FraisForfait> getAllFraisForfait() {
-        return fraisForfaitRepository.findAll();
-    }
-
     // ✅ Création d'un frais forfait
     public FraisForfait createFraisForfait(FraisForfait fraisForfait) {
         if (fraisForfait.getVisiteur() != null && fraisForfait.getVisiteur().getId() != null) {
@@ -47,6 +42,10 @@ public class FraisForfaitService {
             return true;
         }
         return false;
+    }
+
+    public List<FraisForfait> getFraisByVisiteurId(Long visiteurId) {
+        return fraisForfaitRepository.findByVisiteurId(visiteurId);
     }
     
 }

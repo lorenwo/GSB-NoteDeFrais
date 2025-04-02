@@ -24,4 +24,9 @@ export class FraisService {
     console.log('Suppression du frais avec ID :', fraisId);
     return this.http.delete<void>(`${this.apiUrl}/${fraisId}`);
   }
+
+  getFraisByVisiteurId(visiteurId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/visiteur/${visiteurId}`);
+  }
+  
 }
