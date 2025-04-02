@@ -26,12 +26,11 @@ public class FraisForfaitController {
         this.fraisForfaitService = fraisForfaitService;
     }
 
-    // ✅ Récupération de tous les frais
-    @GetMapping
-    public ResponseEntity<List<FraisForfait>> getAllFraisForfait() {
-        List<FraisForfait> fraisForfaits = fraisForfaitService.getAllFraisForfait();
-        return ResponseEntity.ok(fraisForfaits);
-    }
+    @GetMapping("/visiteur/{id}")
+public ResponseEntity<List<FraisForfait>> getFraisByVisiteur(@PathVariable Long id) {
+    List<FraisForfait> frais = fraisForfaitService.getFraisByVisiteurId(id);
+    return ResponseEntity.ok(frais);
+}
 
     // ✅ Création d'un nouveau frais
     @PostMapping
