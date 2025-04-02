@@ -17,46 +17,59 @@ import { UserService } from '../../services/user.service';
 })
 export class FraisFormComponent {
   frais = {
-    visiteur: {}, // sera défini dynamiquement
+    visiteur: {},
     date: '',
     typeFrais: '',
     kilometres: '',
     montant: 0,
     description: ''
   };
-  
 
   typesFrais = ['Repas midi', 'Relais étape', 'Nuitée', 'Kilométrage', 'Hors forfait'];
 
-  constructor(private fraisService: FraisService, private router: Router,  private userService: UserService ) {}
+  constructor(
+    private fraisService: FraisService,
+    private router: Router,
+    private userService: UserService
+  ) {}
+
+  // 🔁 Mettre à jour automatiquement le montant si type = Kilométrage
+  onTypeFraisChange() {
+    if (this.frais.typeFrais === 'Kilométrage') {
+      this.updateMontantKilometrique();
+    }
+  }
+
+  onKilometresChange() {
+    if (this.frais.typeFrais === 'Kilométrage') {
+      this.updateMontantKilometrique();
+    }
+  }
+
+  updateMontantKilometrique() {
+    const km = parseFloat(this.frais.kilometres as any);
+    this.frais.montant = !isNaN(km) ? km * 0.2 : 0;
+  }
 
   onSubmit() {
     const currentUser = this.userService.getUser();
-  
+
     if (!currentUser) {
       alert("Aucun utilisateur connecté.");
       return;
     }
-  
-    // Attribue le visiteur automatiquement
-    this.frais.visiteur = {
-      id: currentUser.id
-    };
-  
+
+    this.frais.visiteur = { id: currentUser.id };
+
     console.log('Requête envoyée au backend :', this.frais);
-  
+
     this.fraisService.addFrais(this.frais).subscribe(
-      response => {
-        console.log('Frais ajouté avec succès');
-        this.goToListForfait();
-      },
-      error => {
-        console.error('Erreur lors de l\'ajout du frais', error);
-      }
+      () => this.goToListForfait(),
+      error => console.error("Erreur lors de l'ajout du frais", error)
     );
   }
 
-  public goToListForfait() {
+  goToListForfait() {
     this.router.navigate(['/liste-frais']);
   }
 }
