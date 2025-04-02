@@ -2,56 +2,80 @@
   <h2>Ajouter un frais forfait</h2>
 
   <form (ngSubmit)="onSubmit()" #fraisForm="ngForm">
-
+    
+    <!-- 📅 Date -->
     <div class="form-group">
       <label for="date">Date :</label>
       <input 
-        type="date" 
-        id="date" 
-        [(ngModel)]="frais.date" 
-        name="date" 
-        required 
+        type="date"
+        id="date"
+        name="date"
+        [(ngModel)]="frais.date"
+        required
       />
     </div>
 
+    <!-- 🧾 Type de frais -->
     <div class="form-group">
       <label for="type">Type de frais :</label>
       <select 
-        id="type" 
-        [(ngModel)]="frais.typeFrais" 
-        name="type" 
-        required>
+        id="type"
+        name="type"
+        [(ngModel)]="frais.typeFrais"
+        (change)="onTypeFraisChange()"
+        required
+      >
         <option *ngFor="let type of typesFrais" [value]="type">{{ type }}</option>
       </select>
     </div>
 
+    <!-- 🚗 Kilométrage -->
     <div class="form-group" *ngIf="frais.typeFrais === 'Kilométrage'">
       <label for="kilometres">Kilomètres parcourus :</label>
       <input 
-        type="number" 
-        id="kilometres" 
-        [(ngModel)]="frais.kilometres" 
-        name="kilometres" 
-        min="0" 
-        step="0.1" 
+        type="number"
+        id="kilometres"
+        name="kilometres"
+        [(ngModel)]="frais.kilometres"
+        (input)="onKilometresChange()"
+        min="0"
+        step="0.1"
+        required
       />
     </div>
 
+    <!-- 💶 Montant (sauf pour Kilométrage) -->
+    <div class="form-group" *ngIf="frais.typeFrais !== 'Kilométrage'">
+      <label for="montant">Montant (€) :</label>
+      <input 
+        type="number"
+        id="montant"
+        name="montant"
+        [(ngModel)]="frais.montant"
+        required
+        min="0"
+        step="0.01"
+      />
+    </div>
+
+    <!-- 📝 Description -->
     <div class="form-group">
       <label for="description">Description :</label>
       <textarea 
-        id="description" 
-        name="description" 
+        id="description"
+        name="description"
+        [(ngModel)]="frais.description"
         rows="3"
         required
-        [(ngModel)]="frais.description"
-        placeholder="Entrez une description">
-      </textarea>
+      ></textarea>
     </div>
 
     <button 
-      type="submit" 
-      class="btn" 
-      [disabled]="!fraisForm.valid">Enregistrer</button>
+      type="submit"
+      class="btn"
+      [disabled]="!fraisForm.valid"
+    >
+      Enregistrer
+    </button>
   </form>
 </div>

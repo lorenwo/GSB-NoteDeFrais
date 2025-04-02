@@ -30,9 +30,6 @@ public class FraisForfaitService {
             throw new RuntimeException("VisiteurId est invalide ou null");
         }
     
-        // ✅ Calcul automatique du montant basé sur le type de frais
-        fraisForfait.calculateMontant();
-    
         return fraisForfaitRepository.save(fraisForfait);
     }
     
