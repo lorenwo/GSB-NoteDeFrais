@@ -70,6 +70,6 @@ export class FraisFormComponent {
   }
 
   goToListForfait() {
-    this.router.navigate(['/liste-frais']);
+    this.router.navigate(['/liste-fraisForfait']);
   }
 }

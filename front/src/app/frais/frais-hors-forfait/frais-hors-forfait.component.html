@@ -1,0 +1,37 @@
+<div class="liste-frais-container">
+    <h2>Frais Hors Forfait</h2>
+  
+    <table *ngIf="fraisHorsForfait.length > 0">
+      <thead>
+        <tr>
+          <th>Numéro Visiteur</th>
+          <th>Date</th>
+          <th>Type de Frais</th>
+          <th>Montant (€)</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let frais of fraisHorsForfait">
+          <td>{{ frais.visiteur.login }}</td>
+          <td>{{ frais.date }}</td>
+          <td>{{ frais.typeFrais }}</td>
+          <td>{{ frais.montant | number: '1.2-2' }} €</td>
+          <td>{{ frais.description }}</td>
+          <td>
+            <button 
+              class="delete-button" 
+              (click)="onDeleteFraisHors(frais)">
+              Supprimer
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <p *ngIf="fraisHorsForfait.length === 0">
+      Aucun frais hors forfait trouvé.
+    </p>
+  </div>
+  
