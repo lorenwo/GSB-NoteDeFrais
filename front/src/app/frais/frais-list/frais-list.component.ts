@@ -23,7 +23,9 @@ export class FraisListComponent implements OnInit {
     const user = this.userService.getUser();
 
     if (!user) {
-      alert("Aucun utilisateur connecté.");
+      if (typeof window !== 'undefined') {
+        alert('Aucun utilisateur connecté.');
+      }
       return;
     }
 
