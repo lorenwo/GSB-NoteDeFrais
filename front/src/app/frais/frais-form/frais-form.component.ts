@@ -53,21 +53,49 @@ export class FraisFormComponent {
 
   onSubmit() {
     const currentUser = this.userService.getUser();
-
+  
     if (!currentUser) {
       alert("Aucun utilisateur connecté.");
       return;
     }
-
+  
     this.frais.visiteur = { id: currentUser.id };
-
-    console.log('Requête envoyée au backend :', this.frais);
-
-    this.fraisService.addFrais(this.frais).subscribe(
-      () => this.goToListForfait(),
-      error => console.error("Erreur lors de l'ajout du frais", error)
-    );
+  
+    // 🔁 Cas Kilométrage : recalculer le montant
+    if (this.frais.typeFrais === 'Kilométrage') {
+      const km = parseFloat(this.frais.kilometres as any);
+      this.frais.montant = !isNaN(km) ? km * 0.2 : 0;
+    }
+  
+    console.log('Frais à enregistrer :', this.frais);
+  
+    this.fraisService.addFrais(this.frais).subscribe({
+      next: (response: any) => {
+        console.log("Frais ajouté :", response);
+  
+        // 🔀 Redirection dynamique en fonction du type + montant
+        const type = this.frais.typeFrais;
+        const montant = this.frais.montant;
+  
+        // 🔎 On définit si ça doit être considéré "hors forfait"
+        const isHorsForfait = (
+          (type === 'Repas midi' && montant > 25) ||
+          (type === 'Nuitée' && montant > 100) ||
+          (type === 'Relais étape' && montant > 150)
+        );
+  
+        if (isHorsForfait || type === 'Hors forfait') {
+          this.router.navigate(['/liste-fraisHorsForfait']);
+        } else {
+          this.router.navigate(['/liste-fraisForfait']);
+        }
+      },
+      error: (err) => {
+        console.error("Erreur lors de l'ajout du frais :", err);
+      }
+    });
   }
+  
 
   goToListForfait() {
     this.router.navigate(['/liste-fraisForfait']);
