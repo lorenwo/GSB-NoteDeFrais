@@ -23,10 +23,22 @@ public class FraisHorsForfaitController {
         return service.getByVisiteurId(id);
     }
 
+    @GetMapping("/{id}")
+public ResponseEntity<FraisHorsForfait> getFraisHorsForfaitById(@PathVariable Long id) {
+    FraisHorsForfait frais = service.getById(id);
+    return ResponseEntity.ok(frais);
+}
+
+
     @PostMapping
     public FraisHorsForfait create(@RequestBody FraisHorsForfait f) {
         return service.save(f);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<FraisHorsForfait> updateFraisHorsForfait(@PathVariable Long id, @RequestBody FraisHorsForfait details) {
+    return ResponseEntity.ok(service.update(details.getId(), details));
+}
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {

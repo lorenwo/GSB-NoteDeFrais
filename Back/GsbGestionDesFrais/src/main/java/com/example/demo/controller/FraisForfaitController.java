@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,12 +33,23 @@ public ResponseEntity<List<FraisForfait>> getFraisByVisiteur(@PathVariable Long 
     return ResponseEntity.ok(frais);
 }
 
+@GetMapping("/{id}")
+public ResponseEntity<FraisForfait> getFraisById(@PathVariable Long id) {
+    FraisForfait frais = fraisForfaitService.getFraisById(id);
+    return ResponseEntity.ok(frais);
+}
+
     // ✅ Création d'un nouveau frais
     @PostMapping
     public ResponseEntity<FraisForfait> createFraisForfait(@RequestBody FraisForfait fraisForfait) {
         FraisForfait createdFraisForfait = fraisForfaitService.createFraisForfait(fraisForfait);
         return ResponseEntity.ok(createdFraisForfait);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<FraisForfait> updateFraisForfait(@PathVariable Long id, @RequestBody FraisForfait fraisDetails) {
+    return ResponseEntity.ok(fraisForfaitService.updateFraisForfait(id, fraisDetails));
+}
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteFraisForfait(@PathVariable Long id) {

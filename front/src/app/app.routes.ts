@@ -14,6 +14,8 @@ export const routes: Routes = [
     { path: 'Accueil', component: AccueilComponent }, // Route pour la page d'accueil
     { path: 'login', component: LoginComponent },
     { path: 'liste-fraisForfait', component: FraisListComponent },
+    { path: 'frais/modifier/:id', component: FraisFormComponent }, // forfait
+    { path: 'frais-hors/modifier/:id', component: FraisFormComponent }, // hors forfait
     { path: 'frais', component: FraisFormComponent },
     { path: 'statistique', component: StatistiqueComponent},
     { path: 'support', component: SupportComponent},

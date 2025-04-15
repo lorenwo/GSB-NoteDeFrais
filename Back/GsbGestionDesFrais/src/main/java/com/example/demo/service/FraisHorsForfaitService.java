@@ -31,4 +31,22 @@ public class FraisHorsForfaitService {
         }
         return false;
     }
+
+    public FraisHorsForfait update(Long id, FraisHorsForfait fraisDetails) {
+        FraisHorsForfait existing = repository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Frais hors forfait non trouvé avec l’ID : " + id));
+    
+        existing.setDate(fraisDetails.getDate());
+        existing.setMontant(fraisDetails.getMontant());
+        existing.setTypeFrais(fraisDetails.getTypeFrais());
+        existing.setDescription(fraisDetails.getDescription());
+    
+        return repository.save(existing);
+    }
+
+    public FraisHorsForfait getById(Long id) {
+    return repository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Frais hors forfait non trouvé avec l'ID : " + id));
+}
+
 }

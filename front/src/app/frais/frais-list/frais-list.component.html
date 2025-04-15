@@ -23,7 +23,9 @@
         <td>{{ frais.montant | number: '1.2-2' }} €</td>
         <td>{{ frais.description }}</td>
         <td>
-          <!-- ✅ Bouton de suppression -->
+          <button (click)="onEditFrais(frais)" class="edit-button">
+            Modifier
+          </button>
           <button 
             (click)="onDeleteFrais(frais)" 
             class="delete-button">

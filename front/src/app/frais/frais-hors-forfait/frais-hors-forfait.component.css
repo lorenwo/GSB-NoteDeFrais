@@ -46,3 +46,23 @@
     transform: scale(0.95);
   }
   
+  .edit-button {
+    background-color: #1890ff; /* Bleu doux */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-right: 6px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+  }
+  
+  .edit-button:hover {
+    background-color: #40a9ff;
+  }
+  
+  .edit-button:active {
+    background-color: #1890ff;
+    transform: scale(0.95);
+  }
+  
