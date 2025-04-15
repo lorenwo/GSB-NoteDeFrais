@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-frais-hors-forfait',
@@ -14,7 +15,7 @@ import { FormsModule } from '@angular/forms';
 export class FraisHorsForfaitComponent implements OnInit {
   fraisHorsForfait: any[] = [];
 
-  constructor(private http: HttpClient, private userService: UserService) {}
+  constructor(private http: HttpClient, private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     const user = this.userService.getUser();
@@ -47,6 +48,10 @@ export class FraisHorsForfaitComponent implements OnInit {
         }
       });
     }
+  }
+  
+  onEditFraisHors(frais: any) {
+    this.router.navigate(['/frais-hors/modifier', frais.id]);
   }
   
 }

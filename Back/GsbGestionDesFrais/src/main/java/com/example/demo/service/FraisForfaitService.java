@@ -85,4 +85,22 @@ public class FraisForfaitService {
     public List<FraisForfait> getFraisByVisiteurId(Long visiteurId) {
         return fraisForfaitRepository.findByVisiteurId(visiteurId);
     }
+
+    public FraisForfait updateFraisForfait(Long id, FraisForfait fraisDetails) {
+        FraisForfait existing = fraisForfaitRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Frais non trouvé avec l’ID : " + id));
+    
+        existing.setDate(fraisDetails.getDate());
+        existing.setTypeFrais(fraisDetails.getTypeFrais());
+        existing.setKilometres(fraisDetails.getKilometres());
+        existing.setMontant(fraisDetails.getMontant());
+        existing.setDescription(fraisDetails.getDescription());
+    
+        return fraisForfaitRepository.save(existing);
+    }
+
+    public FraisForfait getFraisById(Long id) {
+    return fraisForfaitRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Frais non trouvé avec l'ID : " + id));
+}
 }

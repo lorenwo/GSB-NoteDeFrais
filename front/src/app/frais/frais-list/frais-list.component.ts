@@ -3,6 +3,7 @@ import { FraisService } from '../../services/frais.service';
 import { UserService } from '../../services/user.service'; // ✅ AJOUT
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-frais-list',
@@ -16,7 +17,9 @@ export class FraisListComponent implements OnInit {
 
   constructor(
     private fraisService: FraisService,
-    private userService: UserService // ✅ AJOUT
+    private userService: UserService, // ✅ AJOUT
+    private router: Router,
+
   ) {}
 
   ngOnInit() {
@@ -53,5 +56,9 @@ export class FraisListComponent implements OnInit {
         }
       });
     }
+  }
+
+  onEditFrais(frais: any) {
+    this.router.navigate(['/frais/modifier', frais.id]);
   }
 }
