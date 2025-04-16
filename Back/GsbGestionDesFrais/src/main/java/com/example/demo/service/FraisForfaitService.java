@@ -86,21 +86,44 @@ public class FraisForfaitService {
         return fraisForfaitRepository.findByVisiteurId(visiteurId);
     }
 
-    public FraisForfait updateFraisForfait(Long id, FraisForfait fraisDetails) {
-        FraisForfait existing = fraisForfaitRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Frais non trouvé avec l’ID : " + id));
-    
-        existing.setDate(fraisDetails.getDate());
-        existing.setTypeFrais(fraisDetails.getTypeFrais());
-        existing.setKilometres(fraisDetails.getKilometres());
-        existing.setMontant(fraisDetails.getMontant());
-        existing.setDescription(fraisDetails.getDescription());
-    
-        return fraisForfaitRepository.save(existing);
+public FraisForfait updateFraisForfait(Long id, FraisForfait fraisDetails) {
+    FraisForfait existing = fraisForfaitRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Frais non trouvé avec l’ID : " + id));
+
+    // ➕ Met à jour les champs
+    existing.setDate(fraisDetails.getDate());
+    existing.setTypeFrais(fraisDetails.getTypeFrais());
+    existing.setKilometres(fraisDetails.getKilometres());
+    existing.setMontant(fraisDetails.getMontant());
+    existing.setDescription(fraisDetails.getDescription());
+
+    // ✅ Vérifie s’il devient un hors forfait
+    if (doitAllerDansHorsForfait(existing)) {
+        // 🔥 Supprime le frais forfait existant
+        fraisForfaitRepository.deleteById(id);
+
+        // ➕ Crée un nouveau frais hors forfait
+        FraisHorsForfait hors = new FraisHorsForfait();
+        hors.setVisiteur(existing.getVisiteur());
+        hors.setDate(existing.getDate());
+        hors.setMontant(existing.getMontant());
+        hors.setDescription(existing.getDescription());
+        hors.setTypeFrais(existing.getTypeFrais());
+
+        fraisHorsForfaitRepository.save(hors);
+
+        // 💡 Peut retourner null ou un indicateur
+        return null;
     }
+
+    return fraisForfaitRepository.save(existing);
+}
+
 
     public FraisForfait getFraisById(Long id) {
     return fraisForfaitRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("Frais non trouvé avec l'ID : " + id));
 }
+
+
 }

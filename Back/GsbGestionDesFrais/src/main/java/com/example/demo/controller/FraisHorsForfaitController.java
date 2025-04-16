@@ -35,10 +35,12 @@ public ResponseEntity<FraisHorsForfait> getFraisHorsForfaitById(@PathVariable Lo
         return service.save(f);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<FraisHorsForfait> updateFraisHorsForfait(@PathVariable Long id, @RequestBody FraisHorsForfait details) {
-    return ResponseEntity.ok(service.update(details.getId(), details));
+@PutMapping("/{id}")
+public ResponseEntity<?> updateFraisHorsForfait(@PathVariable Long id, @RequestBody FraisHorsForfait f) {
+    Object result = service.updateFraisHorsForfait(id, f);
+    return ResponseEntity.ok(result);
 }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
