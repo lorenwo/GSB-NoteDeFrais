@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -49,6 +50,31 @@ public class VisiteurService {
 
     // ✅ Authentification d'un visiteur
     public Visiteur authenticate(String login, String mdp) {
-        return visiteurRepository.findByLoginAndMdp(login, mdp).orElse(null);
+        Optional<Visiteur> optionalVisiteur = visiteurRepository.findByLogin(login);
+    
+        if (optionalVisiteur.isPresent()) {
+            Visiteur visiteur = optionalVisiteur.get();
+            String hashedInputPassword = hashPassword(mdp);
+            if (visiteur.getMdp().equals(hashedInputPassword)) {
+                return visiteur;
+            }
+        }
+    
+        return null;
     }
+    
+    private String hashPassword(String password) {
+        try {
+            java.security.MessageDigest digest = java.security.MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(password.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                hexString.append(String.format("%02x", b));
+            }
+            return hexString.toString();
+        } catch (Exception e) {
+            throw new RuntimeException("Erreur lors du hachage du mot de passe", e);
+        }
+    }
+    
 }
