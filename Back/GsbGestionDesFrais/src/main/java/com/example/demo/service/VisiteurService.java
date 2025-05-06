@@ -51,4 +51,9 @@ public class VisiteurService {
     public Visiteur authenticate(String login, String mdp) {
         return visiteurRepository.findByLoginAndMdp(login, mdp).orElse(null);
     }
+
+    public List<Visiteur> getVisiteursSansFraisHorsForfait() {
+    return visiteurRepository.findVisiteursSansFraisHorsForfait();
+}
+
 }

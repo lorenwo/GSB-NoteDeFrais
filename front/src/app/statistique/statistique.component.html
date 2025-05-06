@@ -1,1 +1,13 @@
-<p>statistique works!</p>
+<div class="test">
+<h2>Visiteurs sans frais hors forfait</h2>
+
+<ul *ngIf="visiteursSansFraisHors.length > 0; else aucunVisiteur">
+  <li *ngFor="let visiteur of visiteursSansFraisHors">
+    {{ visiteur.nom }} {{ visiteur.prenom }} ({{ visiteur.login }})
+  </li>
+</ul>
+
+<ng-template #aucunVisiteur>
+  <p>Aucun visiteur sans frais hors forfait.</p>
+</ng-template>
+</div>

@@ -29,4 +29,8 @@ export class FraisService {
     return this.http.get<any[]>(`${this.apiUrl}/visiteur/${visiteurId}`);
   }
   
+  getVisiteursSansFraisHorsForfait(): Observable<any[]> {
+    return this.http.get<any[]>('http://localhost:8080/api/visiteur/sans-frais-hors-forfait');
+  }
+  
 }

@@ -42,6 +42,12 @@ public class VisiteurController {
         return visiteur != null ? ResponseEntity.ok(visiteur) : ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/sans-frais-hors-forfait")
+    public ResponseEntity<List<Visiteur>> getVisiteursSansFraisHorsForfait() {
+    return ResponseEntity.ok(visiteurService.getVisiteursSansFraisHorsForfait());
+    }
+
+
     // ✅ Création d'un visiteur
     @PostMapping
     public ResponseEntity<Visiteur> createVisiteur(@RequestBody Visiteur visiteur) {
